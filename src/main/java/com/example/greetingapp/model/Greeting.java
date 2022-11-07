@@ -1,9 +1,11 @@
 package com.example.greetingapp.model;
+
 import javax.persistence.Entity;
 
 import javax.persistence.Id;
 
 @Entity
+//@Entity annotation creates table structure in database
 public class Greeting {
     @Id
 
