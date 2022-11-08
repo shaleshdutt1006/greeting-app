@@ -5,20 +5,29 @@ import com.example.greetingapp.repository.GreetingAppRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class GreetingService {
-
-    private static final String template = "Hello, %s!";
+    @Autowired
+    GreetingAppRepository greetingAppRepository;
+    private static final String template = "Hello, %s %s %s %s!";
     // An AtomicLong is used in applications such as automatically incremented sequence number
     private final AtomicLong counter = new AtomicLong();
 
-    public Greeting greeting(String name) {
-        // return a new Greeting class object with id values incremented by 1 every time and String
-        //format to show message of hello and the name we pass on the Postman
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
 
+    public Greeting addGreeting(Greeting greeting) {
+        String message = String.format(template, (greeting.toString().isEmpty()) ? "Hello World" : "My first name is :", greeting.getFirstName(),
+                "And my Last name is :", greeting.getLastName());
+        return greetingAppRepository.save(new Greeting(counter.incrementAndGet(), message, greeting.getFirstName(), greeting.getLastName()));
+    }
+
+    public List<Greeting> greetingMessage(Greeting greeting) {
+        String message = String.format(template, (greeting.toString().isEmpty()) ? "Hello World" : "My first name is :", greeting.getFirstName(),
+                "And my Last name is :", greeting.getLastName());
+        greetingAppRepository.save(new Greeting(counter.incrementAndGet(), message, greeting.getFirstName(), greeting.getLastName()));
+        return greetingAppRepository.findAll();
     }
 
 }
