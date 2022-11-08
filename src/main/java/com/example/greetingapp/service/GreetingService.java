@@ -31,5 +31,10 @@ public class GreetingService {
         return greetingAppRepository.findAll();
     }
 
+    public Greeting getGreetingById(long id) {
+        return greetingAppRepository.findById(id).get();
+    }
+
+
 }
 

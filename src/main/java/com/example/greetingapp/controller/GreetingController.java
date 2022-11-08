@@ -27,5 +27,10 @@ public class GreetingController {
         return greetingService.addGreeting(greeting);
     }
 
+    //Method to get data by id using path-variable
+    @GetMapping("/getId/{id}")
+    public Greeting getById(@PathVariable Long id) {
+        return greetingService.getGreetingById(id);
+    }
 
 }
