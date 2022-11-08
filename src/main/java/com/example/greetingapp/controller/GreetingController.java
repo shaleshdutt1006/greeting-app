@@ -33,4 +33,16 @@ public class GreetingController {
         return greetingService.getGreetingById(id);
     }
 
+    //Method to get data by id using Requesting Parameter
+    @RequestMapping("/getId")
+    public Greeting getIdUsingParam(@RequestParam(value = "id") Long id) {
+        return greetingService.getGreetingById(id);
+    }
+
+    //Method to get list of all messages using GetAll path-variable
+    @GetMapping("/getall")
+    public List<Greeting> getAll() {
+        return greetingService.getAllGreeting();
+    }
 }
+

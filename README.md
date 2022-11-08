@@ -46,13 +46,8 @@ Repository
 
 
 
-UseCase5-Ability for the Greeting
-
-App to find a Greeting
-
-Message by Id in the
-
-Repository
+UseCase5-Ability for the Greeting App to find a Greeting
+Message by Id in the Repository
 
 
 
@@ -62,13 +57,8 @@ Repository
 
 
 
-UseCase6-Ability for the Greeting
-
-App to List all the
-
-Greeting Messages in
-
-the Repository
+UseCase6-Ability for the Greeting App to List all the 
+Greeting Messages in the Repository
 
 
 
@@ -78,13 +68,8 @@ the Repository
 
 
 
-UseCase7-Ability for the Greeting
-
-App to Edit a Greeting
-
-Messages in the
-
-Repository
+UseCase7-Ability for the Greeting App to Edit a Greeting
+Messages in the Repository
 
 
 
@@ -93,10 +78,5 @@ Repository
 
 
 
-UseCase8-Ability for the Greeting
-
-App to delete a Greeting
-
-Messages in the
-
-Repository
+UseCase8-Ability for the Greeting App to delete a Greeting
+Messages in the Repository

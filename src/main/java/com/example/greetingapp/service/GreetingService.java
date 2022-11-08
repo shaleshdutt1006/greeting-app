@@ -35,6 +35,8 @@ public class GreetingService {
         return greetingAppRepository.findById(id).get();
     }
 
-
+    public List<Greeting> getAllGreeting() {
+        return greetingAppRepository.findAll();
+    }
 }
 
