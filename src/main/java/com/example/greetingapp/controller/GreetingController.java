@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
@@ -43,6 +44,18 @@ public class GreetingController {
     @GetMapping("/getall")
     public List<Greeting> getAll() {
         return greetingService.getAllGreeting();
+    }
+
+    //Editing the database by providing the body using postman
+    @RequestMapping("/edit-data")
+    public Greeting editDatabase(@RequestBody Greeting greeting) {
+        return greetingService.editDatabase(greeting);
+    }
+
+    //Editing only the message in the database
+    @RequestMapping("/edit-message")
+    public Greeting editMessage(@RequestBody Greeting greeting) {
+        return greetingService.editMessage(greeting);
     }
 }
 
