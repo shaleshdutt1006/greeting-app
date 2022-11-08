@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class GreetingService {
     @Autowired
     GreetingAppRepository greetingAppRepository;
+    //%s means we are giving values to this later
     private static final String template = "Hello, %s %s %s %s!";
     // An AtomicLong is used in applications such as automatically incremented sequence number
     private final AtomicLong counter = new AtomicLong();
