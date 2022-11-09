@@ -22,18 +22,24 @@ public class Greeting {
         this.lastName = lastName;
     }
 
+
     public Greeting(long id, String message) {
         this.id = id;
         this.message = message;
     }
 
     public Greeting(long id) {
-
         this.id = id;
     }
 
     public Greeting() {
+    }
 
+    public Greeting(Long id, Greeting greeting) {
+        this.id = id;
+        this.message = greeting.message;
+        this.firstName = greeting.getFirstName();
+        this.lastName = greeting.getLastName();
     }
 
     public long getId() {

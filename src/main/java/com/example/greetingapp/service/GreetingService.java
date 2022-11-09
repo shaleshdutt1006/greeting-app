@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -17,7 +18,6 @@ public class GreetingService {
     private static final String template = "Hello, %s %s %s %s!";
     // An AtomicLong is used in applications such as automatically incremented sequence number
     private final AtomicLong counter = new AtomicLong();
-
 
     public Greeting addGreeting(Greeting greeting) {
         String message = String.format(template, (greeting.toString().isEmpty()) ? "Hello World" : "My first name is :", greeting.getFirstName(),
@@ -40,18 +40,29 @@ public class GreetingService {
         return greetingAppRepository.findAll();
     }
 
-    //Editing only the message part in the database and left part should be the same and getting it
+    //Editing the database if present then change otherwise give null
     // using the greetingAppRepository.findById.getFirstName
-    public Greeting editMessage(Greeting greeting) {
-        String message = "Message is updated in database";
-        return greetingAppRepository.save(new Greeting(greeting.getId(), message, greetingAppRepository.findById(greeting.getId()).get().getFirstName(), greetingAppRepository.findById(greeting.getId()).get().getLastName()));
-
+    public Greeting editDatabase(long id, Greeting greeting) {
+        Optional<Greeting> optional = greetingAppRepository.findById(id);
+        if (optional.isEmpty()) {
+            return null;
+        } else {
+            Greeting greeting1 = new Greeting(id, greeting);
+            greetingAppRepository.save(greeting1);
+            return greeting1;
+        }
     }
 
+    //Edit the database if present then change the data otherwise insert new data
     public Greeting editDatabase(Greeting greeting) {
         String message = String.format(template, (greeting.toString().isEmpty()) ? "Hello World" : "My first name is :", greeting.getFirstName(),
                 "And my Last name is :", greeting.getLastName());
         return greetingAppRepository.save(new Greeting(greeting.getId(), message, greeting.getFirstName(), greeting.getLastName()));
+    }
+
+    public List<Greeting> deleteInDatabase(Greeting greeting) {
+        greetingAppRepository.deleteById(greeting.getId());
+        return greetingAppRepository.findAll();
     }
 }
 

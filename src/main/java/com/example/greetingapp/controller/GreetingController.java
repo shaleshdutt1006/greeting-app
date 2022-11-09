@@ -14,7 +14,7 @@ import java.util.Optional;
 public class GreetingController {
 
     @Autowired
-    private GreetingService greetingService;
+    GreetingService greetingService;
 
     //Method to show and add data in database simultaneously
     @GetMapping("/message")
@@ -35,7 +35,7 @@ public class GreetingController {
     }
 
     //Method to get data by id using Requesting Parameter
-    @RequestMapping("/getId")
+    @GetMapping("/getId")
     public Greeting getIdUsingParam(@RequestParam(value = "id") Long id) {
         return greetingService.getGreetingById(id);
     }
@@ -46,16 +46,23 @@ public class GreetingController {
         return greetingService.getAllGreeting();
     }
 
-    //Editing the database by providing the body using postman
-    @RequestMapping("/edit-data")
+    //Editing only the database if present otherwise return null
+    @PutMapping("/edit-database/{id}")
+    public Greeting editMessage(@PathVariable(value = "id") long id, @RequestBody Greeting greeting) {
+        return greetingService.editDatabase(id, greeting);
+    }
+    //Editing the database by providing the body using postman if present then edit otherwise add the data
+    @PutMapping("/edit-data")
     public Greeting editDatabase(@RequestBody Greeting greeting) {
         return greetingService.editDatabase(greeting);
     }
 
-    //Editing only the message in the database
-    @RequestMapping("/edit-message")
-    public Greeting editMessage(@RequestBody Greeting greeting) {
-        return greetingService.editMessage(greeting);
+    //deleting the database
+    @DeleteMapping("/delete-database")
+    public List<Greeting> deleteInDatabase(@RequestParam Greeting greeting) {
+        return greetingService.deleteInDatabase(greeting);
     }
+
+
 }
 
